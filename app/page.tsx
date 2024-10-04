@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-svh md:flex">
+    <div className="min-h-svh flex">
       <Sidebar />
       <MainContent />
     </div>

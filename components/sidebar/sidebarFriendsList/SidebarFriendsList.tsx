@@ -5,8 +5,8 @@ export default function SidebarFriendsList() {
   return (
     <div className='mx-2'>
       {
-        [1, 2, 3, 4].map((friends, index) => {
-          return <FriendsListItem />
+        [1, 2, 3, 4].map((friends, key) => {
+          return <FriendsListItem key={key} />
         })
       }
     </div>
