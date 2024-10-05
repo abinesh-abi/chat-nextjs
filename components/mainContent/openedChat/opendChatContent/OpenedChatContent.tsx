@@ -8,9 +8,9 @@ export default function OpenedChatContent() {
             {
                 [1, 2, 3, 4, 5,].map((message, key) => {
                     return message % 2 === 0 ?
-                        <OtherPersonChatItem />
+                        <OtherPersonChatItem key={key} />
                         :
-                        <OwnChatItem />
+                        <OwnChatItem key={key} />
                 })
             }
         </div>
