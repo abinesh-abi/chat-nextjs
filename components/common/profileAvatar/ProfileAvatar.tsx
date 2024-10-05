@@ -1,9 +1,15 @@
 import React from 'react'
 
-type ProfileAvatarProps = { src: string, size?: '4' | '8' | '9' }
+const imageSizes={
+    sm:'15px',
+    md:'40px',
+    lg:'50px'
+}
 
-export default function ProfileAvatar({ src, size ='9' }: ProfileAvatarProps) {
+type ProfileAvatarProps = { src: string, size?: keyof typeof imageSizes }
+
+export default function ProfileAvatar({ src, size = 'md' }: ProfileAvatarProps) {
     return (
-        <img src={src} className={`rounded-full aspect-square size-${size}`} alt="" />
+        <img src={src} className={`rounded-full aspect-square`} style={{width:imageSizes[size]}} alt="" />
     )
 }
