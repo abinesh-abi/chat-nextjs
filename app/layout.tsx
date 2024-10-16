@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import OAuthAuthentication from '@/components/OAuth/OAuthAuthentication'
-import UserValidator from '@/components/OAuth/UserValidator'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <OAuthAuthentication>
-          <UserValidator>
-            {children}
-          </UserValidator>
-        </OAuthAuthentication>
+        {children}
       </body>
     </html>
   );

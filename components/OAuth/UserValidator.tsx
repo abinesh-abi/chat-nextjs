@@ -10,9 +10,9 @@ export default function UserValidator({ children }: { children: ReactNode }) {
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>{error.message}</div>;
-    if (!user) return <Login />
+    if (!user) route.push('/login')
 
-    return (
+    else return (
         <div>{children}</div>
     )
 }
