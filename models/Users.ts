@@ -1,26 +1,38 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-export interface Users extends mongoose.Document {
+export type User = {
   name: string;
+  email: string;
   password: string;
-}
+  image: string;
+};
 
-const UserSchema = new Schema<Users>(
+type DbUsers = mongoose.Document & User;
+
+const UserSchema = new Schema<DbUsers>(
   {
     name: {
       type: String,
       required: [true, "Please provide a name."],
       maxlength: [60, "Name cannot be more than 60 characters"],
     },
+    email: {
+      type: String,
+      required: [true, "Please provide a name."],
+      // maxlength: [60, "Name cannot be more than 60 characters"],
+    },
     password: {
       type: String,
-      required: [true, "Please provide Password"],
+      // required: [true, "Please provide Password"],
       // maxlength: [60, "Name cannot be more than 60 characters"],
+    },
+    image: {
+      type: String,
     },
   },
   { timestamps: true }
 );
 
 export default mongoose.models.User ||
-  mongoose.model<Users>("User", UserSchema);
+  mongoose.model<DbUsers>("User", UserSchema);
