@@ -1,5 +1,5 @@
-import OtherPersonChatItem from '@/components/common/ChatItems/OtherPersonChatItem'
-import OwnChatItem from '@/components/common/ChatItems/OwnChatItem'
+import OtherPersonChatItem from '@/app/_components/common/ChatItems/OtherPersonChatItem'
+import OwnChatItem from '@/app/_components/common/ChatItems/OwnChatItem'
 import React from 'react'
 
 export default function OpenedChatContent() {

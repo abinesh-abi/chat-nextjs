@@ -1,4 +1,4 @@
-import FriendsListItem from '@/components/common/friendsListItems/FriendsListItem'
+import FriendsListItem from '@/app/_components/common/friendsListItems/FriendsListItem'
 import React from 'react'
 
 export default function SidebarFriendsList() {

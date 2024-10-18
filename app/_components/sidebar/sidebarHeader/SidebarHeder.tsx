@@ -1,4 +1,4 @@
-import ProfileAvatar from '@/components/common/profileAvatar/ProfileAvatar'
+import ProfileAvatar from '@/app/_components/common/profileAvatar/ProfileAvatar'
 import React from 'react'
 
 export default function SidebarHeder() {

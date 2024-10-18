@@ -2,7 +2,7 @@
 import React, { ReactNode } from 'react'
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
-import Login from '@/components/login/Login'
+import Login from '@/app/_components/login/Login'
 
 export default function UserValidator({ children }: { children: ReactNode }) {
     const { user, error, isLoading } = useUser();

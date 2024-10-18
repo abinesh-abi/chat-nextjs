@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import OAuthAuthentication from '@/components/OAuth/OAuthAuthentication'
-import UserValidator from '@/components/OAuth/UserValidator'
+import OAuthAuthentication from '@/app/_components/OAuth/OAuthAuthentication'
+import UserValidator from '@/app/_components/OAuth/UserValidator'
 
 export const metadata: Metadata = {
   title: "Chat App",
