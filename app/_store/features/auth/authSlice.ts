@@ -1,5 +1,7 @@
 import { User } from "@/models/Users";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getAccessTokenCrud } from "@/axios/api";
+import { ApiResponseObject } from "@/types/common";
 
 type InitialStateType = {
   auth: { access?: string } | null;
@@ -44,6 +46,20 @@ export const getUserPermission = createAsyncThunk(
   }
 );
 
+export const getAccessToken = createAsyncThunk(
+  "auth/accessToken",
+  async (_, thunkApi) => {
+    try {
+      const response: ApiResponseObject<{ accessToken: string }> =
+        await getAccessTokenCrud.get();
+      localStorage.setItem("authentication", response.data.accessToken);
+      return response.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -65,17 +81,20 @@ const authSlice = createSlice({
       //   .addCase(userLogin.pending, (state) => {
       //     state.status = "loading";
       //   })
-      .addCase(userLogin.fulfilled, (state: any, action) => {
-        state.status = "succeeded";
-        state.user = action.payload;
-      })
-      //   .addCase(userLogin.rejected, (state, action) => {
-      //     state.status = "failed";
-      //     state.error = action.error.message;
-      //   })
-      .addCase(getUserPermission.fulfilled, (state: any, action) => {
-        state.status = "succeeded";
-        state.permission = action.payload;
+      // .addCase(userLogin.fulfilled, (state: any, action) => {
+      //   state.status = "succeeded";
+      //   state.user = action.payload;
+      // })
+      // //   .addCase(userLogin.rejected, (state, action) => {
+      // //     state.status = "failed";
+      // //     state.error = action.error.message;
+      // //   })
+      // .addCase(getUserPermission.fulfilled, (state: any, action) => {
+      //   state.status = "succeeded";
+      //   state.permission = action.payload;
+      // })
+      .addCase(getAccessToken.fulfilled, (state: InitialStateType, action) => {
+        state.auth = { access: action.payload.accessToken };
       });
   },
 });

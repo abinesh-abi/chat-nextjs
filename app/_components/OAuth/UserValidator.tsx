@@ -1,12 +1,31 @@
 'use client'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
-import Login from '@/app/_components/login/Login'
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/app/_store';
+import { getAccessToken } from '@/app/_store/features/auth/authSlice';
+
 
 export default function UserValidator({ children }: { children: ReactNode }) {
     const { user, error, isLoading } = useUser();
     const route = useRouter()
+    const dispatch:AppDispatch = useDispatch()
+
+
+    useEffect(() => {
+        const fetchAccessToken = async () => {
+            if (user) {
+                try {
+                    // dispatch(getAccessToken())
+                } catch (err) {
+                    console.error('Error fetching access token:', err);
+                }
+            }
+        };
+
+        fetchAccessToken();
+    }, [user]);
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>{error.message}</div>;

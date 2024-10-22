@@ -1,3 +1,4 @@
+import axios from "axios";
 
 let header = {};
 if (typeof localStorage !== 'undefined' && localStorage.getItem('authentication')) {
@@ -24,7 +25,7 @@ export class CurdOperations {
     }
     get = async (query: string = '') => {
         try {
-            const response = await axiosInstance.get(`${this.api}${query}`);
+            const response:Axios.AxiosXHR<any> = await axiosInstance.get(`${this.api}${query}`);
             return response.data;
         } catch (err) {
             throw err;
