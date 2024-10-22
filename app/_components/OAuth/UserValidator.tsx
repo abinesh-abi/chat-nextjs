@@ -4,7 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/app/_store';
-import { getAccessToken } from '@/app/_store/features/auth/authSlice';
+import { getProfile } from '@/app/_store/features/user/userSlice';
 
 
 export default function UserValidator({ children }: { children: ReactNode }) {
@@ -18,12 +18,12 @@ export default function UserValidator({ children }: { children: ReactNode }) {
             if (user) {
                 try {
                     // dispatch(getAccessToken())
+                    dispatch(getProfile())
                 } catch (err) {
                     console.error('Error fetching access token:', err);
                 }
             }
         };
-
         fetchAccessToken();
     }, [user]);
 

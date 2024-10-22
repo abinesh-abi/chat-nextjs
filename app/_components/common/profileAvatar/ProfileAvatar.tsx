@@ -6,7 +6,7 @@ const imageSizes={
     lg:'50px'
 }
 
-type ProfileAvatarProps = { src: string, size?: keyof typeof imageSizes }
+type ProfileAvatarProps = { src?: string, size?: keyof typeof imageSizes }
 
 export default function ProfileAvatar({ src, size = 'md' }: ProfileAvatarProps) {
     return (

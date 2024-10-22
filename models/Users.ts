@@ -2,10 +2,13 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 export type User = {
+  _id: string;
   name: string;
   email: string;
   password: string;
   image: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 type DbUsers = mongoose.Document & User;
