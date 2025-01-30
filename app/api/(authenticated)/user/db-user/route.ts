@@ -11,13 +11,21 @@ export async function GET(request: Request, { params }: { params: Params }) {
     const session = await getSession();
     const email = session?.user?.email;
     if (email) {
-      const user = await User.findOne({ email });
+      let user = await User.findOne({ email });
+        console.log(session.user)
       if (!user) {
+        user =await User.create({
+          name:session?.user.name,
+          email:session?.user.email,
+          image:session?.user.picture,
+        })
         return new Response(JSON.stringify({ error: "User not found" }), {
           status: 404,
           headers: { "Content-Type": "application/json" },
         });
       }
+      {
+  }
       return NextResponse.json(user, { status: 200 });
     }
   } catch (error) {
