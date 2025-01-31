@@ -36,7 +36,6 @@ export async function GET(request: Request, { params }: { params: Params }) {
   }
   //   const { email } = params;
 
-  return NextResponse.json({ hi: "hello" });
 
   //   try {
   //     const user = await User.findOne({ email });
