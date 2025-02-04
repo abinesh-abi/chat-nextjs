@@ -4,7 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/app/_store';
-import { getProfile } from '@/app/_store/features/user/userSlice';
+import { getProfile } from '@/app/_store/features/userSlice';
 
 
 export default function UserValidator({ children }: { children: ReactNode }) {

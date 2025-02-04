@@ -1,12 +1,14 @@
 import UserSchema from "@/models/Users";
+import { getSession } from "@auth0/nextjs-auth0";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
+  const session = getSession()
+  // const { searchParams } = new URL(request.url);
+  // const id = searchParams.get("id");
 
-  UserSchema.create({ name: "test", password: "ssss" })
-    .then((value) => console.log(value, "user created"))
-    .catch((err) => console.log(err, "errrrrrr"));
+  // UserSchema.create({ name: "test", password: "ssss" })
+  //   .then((value) => console.log(value, "user created"))
+  //   .catch((err) => console.log(err, "errrrrrr"));
 
   return Response.json({ ss: "sss" });
 }

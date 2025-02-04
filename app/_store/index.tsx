@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import authSlice from '@/app/_store/features/user/userSlice'
+import authSlice from '@/app/_store/features/userSlice'
+import sidebarSlice from '@/app/_store/features/sidebarSlice'
 
 const rootReducer = combineReducers({
     user: authSlice,
+    sidebar: sidebarSlice,
 });
 
 // Create the store
