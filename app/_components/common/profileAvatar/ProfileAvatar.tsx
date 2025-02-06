@@ -10,6 +10,6 @@ type ProfileAvatarProps = { src?: string, size?: keyof typeof imageSizes }
 
 export default function ProfileAvatar({ src, size = 'md' }: ProfileAvatarProps) {
     return (
-        <img src={src} className={`rounded-full aspect-square`} style={{width:imageSizes[size]}} alt="" />
+        <img src={src} className={`rounded-full aspect-square`} style={{width:imageSizes[size]}} alt="profile" />
     )
 }
