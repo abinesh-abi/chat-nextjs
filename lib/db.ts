@@ -122,10 +122,12 @@ if (!MONGODB_URI) {
     )
 }
 
-let cached = global.mongoose
+let gbl: typeof globalThis & {mongoose:any} ={mongoose,...global}
+
+let cached = gbl.mongoose
 
 if (!cached) {
-    cached = global.mongoose = { conn: null, promise: null }
+    cached = gbl.mongoose = { conn: null, promise: null }
 }
 
 async function dbConnect() {

@@ -1,6 +1,7 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import { NextResponse } from "next/server";
 import User from "@/models/Users";
+import { getUsersWithoutChat } from "@/app/api/_services/userServices";
 // Define the type for the request parameters
 interface Params {
   //   email: string;
@@ -9,8 +10,14 @@ interface Params {
 export async function GET(request: Request, { params }: { params: Params }) {
   try {
     const session = await getSession();
+    if (!session)
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
     const email = session?.user?.email;
-    let usersList = await User.find({ email:{$ne:email} });
+    // let usersList = await User.find({ email: { $ne: email } });
+    let usersList = await getUsersWithoutChat(email)
 
     return NextResponse.json(usersList, { status: 200 });
   } catch (error) {
