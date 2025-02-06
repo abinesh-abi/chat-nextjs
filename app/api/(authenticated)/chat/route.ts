@@ -1,8 +1,10 @@
 import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
 import { NextResponse } from "next/server";
-import User from "@/models/Users";
+import Users, { User } from "@/models/Users";
 import * as Yup from "yup";
 import Chat from "@/models/Chat";
+import { getUserByEmail } from "../../_services/userServices";
+import { getChatUsersList } from "../../_services/chatServices";
 // Define the type for the request parameters
 interface Params {
   //   email: string;
@@ -12,9 +14,13 @@ export async function GET(request: Request, { params }: { params: Params }) {
   try {
     const session = await getSession();
     const email = session?.user?.email;
-    let usersList = await User.find({ email: { $ne: email } });
+    const user = await getUserByEmail(email);
+    if (!user?._id) {
+      return NextResponse.json({ msg: "User Not Found" }, { status: 404 });
+    }
+    const userLIst = await getChatUsersList(user?._id);
 
-    return NextResponse.json(usersList, { status: 200 });
+    return NextResponse.json(userLIst, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { message: "Server error", error },
@@ -34,10 +40,7 @@ export async function POST(request: Request, { params }: { params: Params }) {
     const session = await getSession();
 
     if (!session)
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     const body = await request.json();
     const validatedData = await chatCreateSchema.validate(body, {
       abortEarly: false,

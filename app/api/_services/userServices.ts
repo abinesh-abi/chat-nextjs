@@ -1,8 +1,8 @@
-import Users from "@/models/Users";
+import Users, { User } from "@/models/Users";
 
-export async function getUserByEmail(email: String) {
+export async function getUserByEmail(email: String): Promise<User | null> {
   try {
-    let user = await Users.find({ email });
+    let user = await Users.findOne({ email });
     return user;
   } catch (error) {
     throw error;

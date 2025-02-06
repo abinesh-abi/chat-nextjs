@@ -1,14 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getUsersWithoutOwnCrud } from "@/app/_axios/api";
+import { createChatCrud, getUsersWithoutOwnCrud } from "@/app/_axios/api";
 import { Users } from "@/types/common";
+import { ChatUserListType } from "@/types/chat";
 
 type InitialStateType = {
   allUsers: Users[];
+  chatUsers: ChatUserListType[];
   isAddUser: boolean;
 };
 
 const initialState: InitialStateType = {
   allUsers: [],
+  chatUsers: [],
   isAddUser: false,
 };
 
@@ -17,6 +20,17 @@ export const getOtherUsers = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const response: Users[] = await getUsersWithoutOwnCrud.get();
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+export const getChatLIst = createAsyncThunk(
+  "chat-list",
+  async (_, thunkApi) => {
+    try {
+      const response: ChatUserListType[] = await createChatCrud.get();
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -34,13 +48,13 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      getOtherUsers.fulfilled,
-      (state: InitialStateType, action) => {
-        console.log(action.payload, "appppp");
+    builder
+      .addCase(getOtherUsers.fulfilled, (state: InitialStateType, action) => {
         state.allUsers = action.payload;
-      }
-    );
+      })
+      .addCase(getChatLIst.fulfilled, (state: InitialStateType, action) => {
+        state.chatUsers = action.payload;
+      });
   },
 });
 

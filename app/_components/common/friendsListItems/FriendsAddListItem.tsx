@@ -11,7 +11,7 @@ type Props = {
 }
 
 
-export default function FriendsListItem({ user }: Props) {
+export default function FriendsAddListItem({ user }: Props) {
     const currUser = useSelector((state: RootState) => state.user)
     
     function handleCreateChat() {
