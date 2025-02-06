@@ -1,11 +1,14 @@
 import React from 'react'
 import ProfileAvatar from '../profileAvatar/ProfileAvatar'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/app/_store'
 
-export default function OwnChatItem() {
+export default function OwnChatItem({ content }: { content: string }) {
+    const chat = useSelector((state: RootState) => state.chat)
     return (
         <div className='p-2 flex gap-1 items-end'>
-            <ProfileAvatar size='sm' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.wEsBe2udHBieFeZVmus8qAHaHk%26pid%3DApi&f=1&ipt=d6576018225cdbc15a215bee3f7ff6d05a058bdcff1028a83865b7c0c807e2a0&ipo=images' />
-            <div className='bg-[#DCE8FF] p-3 rounded-xl'>.</div>
+            <ProfileAvatar size='sm' src={chat.selectedChat?.userDetails.image} />
+            <div className='bg-[#DCE8FF] p-3 rounded-xl'>{content}</div>
         </div>
     )
 }

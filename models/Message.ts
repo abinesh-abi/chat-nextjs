@@ -1,16 +1,9 @@
+import { MessageType } from "@/types/chat";
 import mongoose, { ObjectId } from "mongoose";
 const Schema = mongoose.Schema;
 
-export type Message = {
-  _id: string;
-  sender: ObjectId;
-  chat: ObjectId;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-};
 
-type DbMessage = mongoose.Document & Message;
+type DbMessage = mongoose.Document & MessageType;
 
 const MessageSchema = new Schema<DbMessage>(
   {

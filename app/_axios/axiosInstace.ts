@@ -33,7 +33,7 @@ export class CurdOperations {
     };
     retrieve = async (id: number | string, query: string = '') => {
         try {
-            const response = await axiosInstance.get(`${this.api}${id}/${query}`);
+            const response:Axios.AxiosXHR<any> = await axiosInstance.get(`${this.api}${id}/${query}`);
             return response.data;
         } catch (err) {
             throw err;
@@ -42,7 +42,7 @@ export class CurdOperations {
     post = async (body = {}, query: string = '') => {
         
         try {
-            const response = await axiosInstance.post(`${this.api + query}`, body);
+            const response:Axios.AxiosXHR<any> = await axiosInstance.post(`${this.api + query}`, body);
             return response.data;
         } catch (err) {
             throw err;
@@ -50,7 +50,7 @@ export class CurdOperations {
     };
     patch = async (id: number |string, body = {}, query: string = '') => {
         try {
-            const response = await axiosInstance.patch(`${this.api}${id}/${query}`, body);
+            const response:Axios.AxiosXHR<any> = await axiosInstance.patch(`${this.api}${id}/${query}`, body);
             return response.data;
         } catch (err) {
             throw err;
@@ -58,7 +58,7 @@ export class CurdOperations {
     };
     put = async (id: number | string, body = {}, query: string = '') => {
         try {
-            const response = await axiosInstance.put(`${this.api}${id}/${query}`, body);
+            const response:Axios.AxiosXHR<any> = await axiosInstance.put(`${this.api}${id}/${query}`, body);
             return response.data;
         } catch (err) {
             throw err;
@@ -67,7 +67,7 @@ export class CurdOperations {
 
     delete = async (id: number | string, query: string = '') => {
         try {
-            const response = await axiosInstance.delete(`${this.api}${id}/${query}`);
+            const response:Axios.AxiosXHR<any> = await axiosInstance.delete(`${this.api}${id}/${query}`);
             return response.data;
         } catch (err) {
             throw err;

@@ -16,8 +16,8 @@ export default function SidebarChatList() {
   return (
     <div className='mx-2'>
       {
-        sidebar.chatUsers.map((friends, key) => {
-          return <ChatListItem user={friends} key={key} />
+        sidebar.chatUsers.map((chat, key) => {
+          return <ChatListItem chat={chat} key={key} />
         })
       }
     </div>

@@ -13,10 +13,6 @@ const initialState: InitialStateType = {
   user: null,
 };
 
-interface LoginRequestBody {
-  username: string;
-  password: string;
-}
 
 type authResponse = { access: string };
 

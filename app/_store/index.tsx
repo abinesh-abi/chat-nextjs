@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authSlice from '@/app/_store/features/userSlice'
 import sidebarSlice from '@/app/_store/features/sidebarSlice'
+import chatSlice from '@/app/_store/features/chatSlice'
 
 const rootReducer = combineReducers({
     user: authSlice,
     sidebar: sidebarSlice,
+    chat: chatSlice,
 });
 
 // Create the store
