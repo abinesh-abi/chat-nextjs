@@ -1,32 +1,10 @@
-import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
+import { getSession } from "@auth0/nextjs-auth0";
 import { NextResponse } from "next/server";
-import Users, { User } from "@/models/Users";
 import * as Yup from "yup";
-import Chat from "@/models/Chat";
 import { getUserByEmail } from "../../../_services/userServices";
-import { createMessage, getChatUsersList } from "../../../_services/chatServices";
-// Define the type for the request parameters
+import { createMessage } from "../../../_services/chatServices";
 interface Params {
   //   email: string;
-}
-
-export async function GET(request: Request, { params }: { params: Params }) {
-  try {
-    const session = await getSession();
-    const email = session?.user?.email;
-    const user = await getUserByEmail(email);
-    if (!user?._id) {
-      return NextResponse.json({ msg: "User Not Found" }, { status: 404 });
-    }
-    const userLIst = await getChatUsersList(user?._id);
-
-    return NextResponse.json(userLIst, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Server error", error },
-      { status: 500 }
-    );
-  }
 }
 
 const messageCreateSchema = Yup.object().shape({
@@ -52,10 +30,9 @@ export async function POST(request: Request, { params }: { params: Params }) {
     });
     const { chatId, content } = validatedData;
 
-    let newMessage = await createMessage(user?._id,chatId,content);
+    let newMessage = await createMessage(user?._id, chatId, content);
 
     return NextResponse.json(newMessage, { status: 200 });
-
   } catch (error) {
     if (error instanceof Yup.ValidationError) {
       return NextResponse.json({ message: error.errors }, { status: 400 });

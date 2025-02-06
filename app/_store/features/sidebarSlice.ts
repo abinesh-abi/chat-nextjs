@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createChatCrud, getUsersWithoutOwnCrud } from "@/app/_axios/api";
+import { chatCrud, getUsersWithoutOwnCrud } from "@/app/_axios/api";
 import { Users } from "@/types/common";
 import { ChatUserListType } from "@/types/chat";
 
@@ -30,7 +30,7 @@ export const getChatLIst = createAsyncThunk(
   "chat-list",
   async (_, thunkApi) => {
     try {
-      const response: ChatUserListType[] = await createChatCrud.get();
+      const response: ChatUserListType[] = await chatCrud.get();
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(error);

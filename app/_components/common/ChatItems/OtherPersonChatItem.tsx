@@ -6,9 +6,9 @@ import { RootState } from '@/app/_store'
 export default function OtherPersonChatItem({content}:{content:string}) {
     const user = useSelector((state: RootState) => state.user)
     return (
-        <div className='p-2 flex gap-1 items-end justify-end'>
-            <div className='bg-[#DCE8FF] p-3 rounded-xl'>{content}</div>
+        <div className='p-2 flex gap-1 items-end '>
             <ProfileAvatar size='sm' src={user.user?.image} />
+            <div className='bg-[#DCE8FF] p-3 rounded-xl'>{content}</div>
         </div>
     )
 }

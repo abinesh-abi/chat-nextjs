@@ -8,9 +8,6 @@ export default function OpenedChatContent() {
     const chat = useSelector((state: RootState) => state.chat)
     const user = useSelector((state: RootState) => state.user)
 
-
-    console.log({ user })
-
     return (
         <div className='h-full'>
             {

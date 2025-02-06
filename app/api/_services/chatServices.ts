@@ -1,6 +1,6 @@
 import Chat from "@/models/Chat";
-import Message, { MessageType } from "@/models/Message";
-import { ChatUserListType } from "@/types/chat";
+import Message from "@/models/Message";
+import { ChatUserListType, MessageType } from "@/types/chat";
 import mongoose from "mongoose";
 
 export async function getChatUsersList(
@@ -49,7 +49,7 @@ export async function createMessage(
   // const userObjId = new mongoose.Types.ObjectId(userId);
   // const chatObjId = new mongoose.Types.ObjectId(chatId);
   try {
-    const message = Message.create({
+    const message = await Message.create({
       sender: userId,
       chat: chatId,
       content,
@@ -59,3 +59,19 @@ export async function createMessage(
     throw error;
   }
 }
+
+export async function getMessage(
+  chatId: string,
+): Promise<MessageType[]> {
+  // const userObjId = new mongoose.Types.ObjectId(userId);
+  // const chatObjId = new mongoose.Types.ObjectId(chatId);
+  try {
+    const messages = await Message.find({
+      chat: chatId,
+    });
+    return messages;
+  } catch (error) {
+    throw error;
+  }
+}
+

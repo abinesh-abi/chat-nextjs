@@ -14,6 +14,7 @@ export default function CreateMessage() {
     function handleCreateMessage() {
         if (chat.selectedChat?._id) {
             dispatch(crateMessage({ content: message, chatId: chat.selectedChat?._id }))
+            .then(()=>setMessage(''))
         }
     }
 

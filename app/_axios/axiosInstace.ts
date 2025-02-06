@@ -33,7 +33,7 @@ export class CurdOperations {
     };
     retrieve = async (id: number | string, query: string = '') => {
         try {
-            const response:Axios.AxiosXHR<any> = await axiosInstance.get(`${this.api}${id}/${query}`);
+            const response:Axios.AxiosXHR<any> = await axiosInstance.get(`${this.api}/${id}${query}`);
             return response.data;
         } catch (err) {
             throw err;

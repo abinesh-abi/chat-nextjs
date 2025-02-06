@@ -1,7 +1,7 @@
 import { User } from "@/models/Users";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ApiResponseObject } from "@/types/common";
-import { getAccessTokenCrud, messageCrud, profileCrud } from "@/app/_axios/api";
+import { chatCrud, getAccessTokenCrud, messageCrud, profileCrud } from "@/app/_axios/api";
 import { ChatUserListType, MessageType } from "@/types/chat";
 
 type InitialStateType = {
@@ -30,6 +30,18 @@ export const crateMessage = createAsyncThunk(
   }
 );
 
+export const getMessageByChatId = createAsyncThunk(
+  "message/get",
+  async (params: { chatId: string }, thunkApi) => {
+    try {
+      const response: MessageType[] = await chatCrud.retrieve(params.chatId);
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -40,13 +52,15 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(crateMessage.fulfilled, (state: InitialStateType, action) => {
-        state.messageList = [...state.messageList,action.payload];
-      })
-    //   .addCase(getProfile.fulfilled, (state: InitialStateType, action) => {
-    //     state.user = action.payload;
-    //   });
+    builder.addCase(
+      crateMessage.fulfilled,
+      (state: InitialStateType, action) => {
+        state.messageList = [...state.messageList, action.payload];
+      }
+    )
+      .addCase(getMessageByChatId.fulfilled, (state: InitialStateType, action) => {
+        state.messageList = action.payload;
+      });
   },
 });
 

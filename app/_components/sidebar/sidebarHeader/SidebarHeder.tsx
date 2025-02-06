@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 
 export default function SidebarHeder() {
   const user = useSelector((state: RootState) => state.user)
-  console.log(user)
   return (
     <div className='flex py-2 items-center gap-2'>
       <ProfileAvatar size='lg' src={user.user?.image || '/user/profileAvatar.png'} />
