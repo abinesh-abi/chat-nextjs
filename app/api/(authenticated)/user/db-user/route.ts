@@ -12,7 +12,6 @@ export async function GET(request: Request, { params }: { params: Params }) {
     const email = session?.user?.email;
     if (email) {
       let user = await User.findOne({ email });
-        console.log(session.user)
       if (!user) {
         user =await User.create({
           name:session?.user.name,

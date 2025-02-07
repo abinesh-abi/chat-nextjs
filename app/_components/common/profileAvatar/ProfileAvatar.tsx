@@ -1,3 +1,4 @@
+import NextImage from 'next/image';
 import React, { useEffect, useState } from 'react'
 
 const imageSizes = {
@@ -29,10 +30,12 @@ export default function ProfileAvatar({ src, size = 'md' }: ProfileAvatarProps) 
         loadImage();
     }, [src]);
     return (
-        <img src={imageSrc || '/user/profileAvatar.png'}
+        <NextImage src={imageSrc || '/user/profileAvatar.png'}
             className={`rounded-full aspect-square`}
             style={{ width: imageSizes[size] }}
             alt="profile"
+            width={10}
+            height={10}
             loading='lazy'
         />
     )
