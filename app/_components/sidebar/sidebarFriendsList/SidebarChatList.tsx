@@ -10,7 +10,7 @@ export default function SidebarChatList() {
 
   useEffect(() => {
     dispatch(getChatLIst())
-  }, [])
+  }, [dispatch])
 
 
   return (

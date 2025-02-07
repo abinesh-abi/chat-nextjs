@@ -10,7 +10,7 @@ export default function SidebarAddFriendsList() {
 
   useEffect(() => {
     dispatch(getOtherUsers())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className='mx-2'>

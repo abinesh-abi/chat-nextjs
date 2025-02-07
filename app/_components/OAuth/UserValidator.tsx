@@ -25,7 +25,7 @@ export default function UserValidator({ children }: { children: ReactNode }) {
             }
         };
         fetchAccessToken();
-    }, [user]);
+    }, [user,dispatch]);
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>{error.message}</div>;

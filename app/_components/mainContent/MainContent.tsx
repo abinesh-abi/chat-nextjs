@@ -16,10 +16,14 @@ export default function MainContent() {
 
 
   useEffect(() => {
-    if (chat.selectedChat?._id) {
-      dispatch(getMessageByChatId({chatId:chat.selectedChat?._id}))
+    function fetchData() {
+
+      if (chat.selectedChat?._id) {
+        dispatch(getMessageByChatId({ chatId: chat.selectedChat?._id }))
+      }
     }
-  }, [chat.selectedChat?._id])
+    fetchData()
+  }, [chat.selectedChat?._id, dispatch])
 
   return (
     <div className='w-full'>
