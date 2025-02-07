@@ -1,7 +1,6 @@
 import ProfileAvatar from '@/app/_components/common/profileAvatar/ProfileAvatar'
 import { RootState } from '@/app/_store'
 import React from 'react'
-import { FiLogOut } from 'react-icons/fi'
 import { useSelector } from 'react-redux'
 
 export default function OpenedChatHeader() {
@@ -12,10 +11,6 @@ export default function OpenedChatHeader() {
                 <ProfileAvatar size='lg' src={chat.selectedChat?.userDetails.image} />
                 <h3>{chat.selectedChat?.userDetails.name}</h3>
             </div>
-            <a href="/api/auth/logout"
-            className='text-red-700'
-            ><FiLogOut /></a>
-
         </div>
     )
 }

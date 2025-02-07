@@ -1,10 +1,11 @@
 import React from 'react'
 import ProfileAvatar from '../profileAvatar/ProfileAvatar'
 import { Users } from '@/types/common'
-import { createChatCrud } from '@/app/_axios/api'
+import { chatCrud } from '@/app/_axios/api'
 import { CiSquarePlus } from 'react-icons/ci'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/app/_store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/app/_store'
+import { crateChat } from '@/app/_store/features/sidebarSlice'
 
 type Props = {
     user: Users
@@ -13,12 +14,11 @@ type Props = {
 
 export default function FriendsAddListItem({ user }: Props) {
     const currUser = useSelector((state: RootState) => state.user)
-    
-    function handleCreateChat() {
-        try {
-            createChatCrud.post({ user1:currUser.user?._id,user2:user._id})
-        } catch (error) {
+    const dispatch: AppDispatch = useDispatch()
 
+    function handleCreateChat() {
+        if (currUser.user) {
+            dispatch(crateChat({ user1: currUser.user?._id, user2: user._id }))
         }
     }
     return (

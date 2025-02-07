@@ -38,6 +38,18 @@ export const getChatLIst = createAsyncThunk(
   }
 );
 
+export const crateChat = createAsyncThunk(
+  "message/crate",
+  async ({ user1, user2 }: { user1: string; user2: string }, thunkApi) => {
+    try {
+      const response: Users = await chatCrud.post({ user1, user2 });
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "sidebar",
   initialState,
@@ -54,6 +66,11 @@ const userSlice = createSlice({
       })
       .addCase(getChatLIst.fulfilled, (state: InitialStateType, action) => {
         state.chatUsers = action.payload;
+      })
+      .addCase(crateChat.fulfilled, (state: InitialStateType, action) => {
+        state.allUsers = state.allUsers.filter(
+          (val) => val._id !== action.payload._id
+        );
       });
   },
 });
