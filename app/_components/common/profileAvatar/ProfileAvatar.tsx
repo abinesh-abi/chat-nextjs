@@ -37,6 +37,7 @@ export default function ProfileAvatar({ src, size = 'md' }: ProfileAvatarProps) 
             width={10}
             height={10}
             loading='lazy'
+            unoptimized
         />
     )
 }

@@ -1,8 +1,14 @@
 import { User } from "@/models/Users";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ApiResponseObject } from "@/types/common";
-import { chatCrud, getAccessTokenCrud, messageCrud, profileCrud } from "@/app/_axios/api";
+import {
+  chatCrud,
+  getAccessTokenCrud,
+  messageCrud,
+  profileCrud,
+} from "@/app/_axios/api";
 import { ChatUserListType, MessageType } from "@/types/chat";
+import { RootState } from "..";
 
 type InitialStateType = {
   // isChatOpen: boolean;
@@ -19,10 +25,21 @@ const initialState: InitialStateType = {
 };
 
 export const crateMessage = createAsyncThunk(
-  "message/crate",
+  "message/create",
   async (params: { chatId: string; content: string }, thunkApi) => {
+    const state = thunkApi.getState() as RootState;
+
     try {
       const response: MessageType = await messageCrud.post(params);
+
+      state.socket.socket?.send(
+        JSON.stringify({
+          type: "private_message",
+          receiver: state.chat.selectedChat?.userDetails._id,
+          message: response,
+        })
+      );
+
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -50,20 +67,24 @@ const userSlice = createSlice({
     selectChat: (state, action: PayloadAction<ChatUserListType>) => {
       return { ...state, selectedChat: action.payload };
     },
+    appendMessage: (state, action: PayloadAction<MessageType>) => {
+      return { ...state, messageList: [...state.messageList, action.payload] };
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      crateMessage.fulfilled,
-      (state: InitialStateType, action) => {
+    builder
+      .addCase(crateMessage.fulfilled, (state: InitialStateType, action) => {
         state.messageList = [...state.messageList, action.payload];
-      }
-    )
-      .addCase(getMessageByChatId.fulfilled, (state: InitialStateType, action) => {
-        state.messageList = action.payload;
-      });
+      })
+      .addCase(
+        getMessageByChatId.fulfilled,
+        (state: InitialStateType, action) => {
+          state.messageList = action.payload;
+        }
+      );
   },
 });
 
-export const { selectChat } = userSlice.actions;
+export const { selectChat, appendMessage } = userSlice.actions;
 
 export default userSlice.reducer;

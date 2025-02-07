@@ -109,9 +109,10 @@
 
 // /src/app/lib/db.js
 
+import CONFIG from "@/config/CONFIG";
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = CONFIG.MONGODB_URI;
 
 if (!MONGODB_URI) {
   throw new Error(
