@@ -6,7 +6,7 @@ const imageSizes = {
     lg: '50px'
 }
 
-type ProfileAvatarProps = { src: string, size?: keyof typeof imageSizes }
+type ProfileAvatarProps = { src?: string, size?: keyof typeof imageSizes }
 
 
 export default function ProfileAvatar({ src, size = 'md' }: ProfileAvatarProps) {
@@ -16,6 +16,7 @@ export default function ProfileAvatar({ src, size = 'md' }: ProfileAvatarProps) 
     useEffect(() => {
         const loadImage = async () => {
             try {
+                if (!src) return
                 const img = new Image();
                 img.src = src;
                 img.onload = () => setImageSrc(src);
