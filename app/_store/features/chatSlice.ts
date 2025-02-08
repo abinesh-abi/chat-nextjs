@@ -64,7 +64,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     // toggle chat open or not
-    selectChat: (state, action: PayloadAction<ChatUserListType>) => {
+    selectChat: (state, action: PayloadAction<ChatUserListType | null>) => {
       return { ...state, selectedChat: action.payload };
     },
     appendMessage: (state, action: PayloadAction<MessageType>) => {

@@ -14,7 +14,7 @@ export default function SidebarChatList() {
 
 
   return (
-    <div className='mx-2'>
+    <div className='mx-2 py-3 h-[80%] overflow-y-auto'>
       {
         sidebar.chatUsers.map((chat, key) => {
           return <ChatListItem chat={chat} key={key} />

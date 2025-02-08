@@ -9,7 +9,7 @@ export default function OpenedChatContent() {
     const user = useSelector((state: RootState) => state.user)
 
     return (
-        <div className='h-full'>
+        <div className='h-full overflow-y-auto'>
             {
                 chat.messageList.map((message, key) => {
                     const isCurrentUser = user.user?._id === message.sender

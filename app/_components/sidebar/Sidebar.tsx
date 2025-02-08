@@ -24,7 +24,7 @@ export default function Sidebar() {
 
 
     return (
-        <div className='min-w-[400px] p-2 bg-[#E7F2F8]'>
+        <div className='md:min-w-[400px] sm:w-full p-2 bg-[#E7F2F8] h-full'>
             <SidebarHeder />
             <div className='flex items-center'>
                 <SidebarSearch />
